@@ -41,6 +41,11 @@ class Content_article extends CI_Controller {
 				 $this->load->view('add_new', $data);
 		 }
 
+		public function editorfix($value){
+			$search = array('html', '/\r', '/\n', '/html','head','/head','title','/title','body','/body','p','/p','<','>','</','</>','/','&gt;','&lt;');
+			$replace = array('', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '','','', '', '', '','','','', '','','', '', '');
+			return str_replace($search, $replace, $value);
+		}
 
 		 public function save_new(){
 			 $username = $this->session->userdata('user_id');
@@ -54,15 +59,15 @@ class Content_article extends CI_Controller {
 			 $running_news = $this->security->sanitize_filename($this->input->post('running_news'), TRUE);
 			 $headline = $this->security->sanitize_filename($this->input->post('headline'), TRUE);
 			 $komentar_status = $this->security->sanitize_filename($this->input->post('open_comment'), TRUE);
-			 $isi_article = $this->db->escape($this->input->post('isi_article'));
-			 $isi_article_eng = $this->db->escape($this->input->post('article_eng'));
+			 $isi_article = $this->editorfix($this->db->escape($this->input->post('isi_article')));
+			 $isi_article_eng = $this->editorfix($this->db->escape($this->input->post('article_eng')));
 			 $url_article1 = strtolower($this->input->post('title'));
 			 $url_article2 = str_replace(' ','-',$url_article1);
 			 $url_article3 = str_replace('/','atau',$url_article2);
 			 $url_article = str_replace('&','dan',$url_article3);
 			 $foto = $this->library_function->genCode();
-			 echo $this->input->post('isi_article');
-			/* $data = array(
+			// echo $this->input->post('isi_article');
+			 $data = array(
 						'title'	=> $title,
 						'username' => $username,
 						'kategori'	=> $article_category,
@@ -90,7 +95,7 @@ class Content_article extends CI_Controller {
 		 				$data = array_merge($data,$ext);
 		 				$this->upload_gambar('foto',$foto,'assets/article_content');
  				}
-				echo $this->db->insert('article',$data);*/
+				echo $this->db->insert('article',$data);
 				//echo json_encode($data);
 				//echo $this->db->insert('article',$data);
 
@@ -140,6 +145,7 @@ class Content_article extends CI_Controller {
 
 				 public function update_artikel(){
 					 $username = $this->session->userdata('user_id');
+					 $id_article = $this->input->post('id_article');
 					 $hari = $this->library_function->hari_indo(date('d'));
 					 $tanggal = date("Y-m-d");
 					 $jam = date("h:i:s");
@@ -150,15 +156,14 @@ class Content_article extends CI_Controller {
 					 $running_news = $this->security->sanitize_filename($this->input->post('running_news'), TRUE);
 					 $headline = $this->security->sanitize_filename($this->input->post('headline'), TRUE);
 					 $komentar_status = $this->security->sanitize_filename($this->input->post('open_comment'), TRUE);
-					 $isi_article = $this->db->escape($this->input->post('isi_article'));
-					 $isi_article_eng = $this->db->escape($this->input->post('article_eng'));
+					$isi_article = $this->editorfix($this->input->post('isi_article'));
+					$isi_article_eng =$this->editorfix($this->input->post('article_eng'));
 					 $url_article1 = strtolower($this->input->post('title'));
 					 $url_article2 = str_replace(' ','-',$url_article1);
 					 $url_article3 = str_replace('/','atau',$url_article2);
 					 $url_article = str_replace('&','dan',$url_article3);
 					 $foto = $this->library_function->genCode();
-
-					 $data = array(
+					$data = array(
 								'title'	=> $title,
 								'username' => $username,
 								'kategori'	=> $article_category,

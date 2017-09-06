@@ -4,7 +4,7 @@ class library_function extends CI_Model {
 
         $sql_details = array(
             'user'  => 'root',
-            'pass'  => 'root',
+            'pass'  => '',
             'db'    => 'first_admin',
             'host'  => 'localhost'
         );

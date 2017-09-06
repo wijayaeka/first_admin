@@ -104,7 +104,7 @@ $("#pageload").html(pageload);
 
     /* ADD */
     $('#buttonAdd').click( function () {
-        $( "#minimizeSidebar" ).trigger( "click" );
+        //$( "#minimizeSidebar" ).trigger( "click" );
         $('#noticeModal').modal({backdrop: 'static',keyboard: false});
             $.ajax({
       						type:"POST",

@@ -87,7 +87,7 @@
 <div class="row">
 <div class="modal-body">
   <?php foreach($data_article as $da){?>
-      <input type="hidden" name="id_article" id="id_article" value="<?php echo $da->id_article;?>" />
+      <input type="text" name="id_article" id="id_article" value="<?php echo $da->id_article;?>" />
       <input type="hidden" id="<?php echo $this->security->get_csrf_token_name(); ?>" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                                                 <div class="col-sm-6">
                                                   <div class="input-group">

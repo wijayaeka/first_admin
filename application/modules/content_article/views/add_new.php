@@ -310,14 +310,12 @@
                                                  data: data,
                                                  processData: false,
                                                  success: function(datas){
-                                                   alert(datas)
-                                                     //$('#datatables').DataTable().draw();
+                                                     $('#datatables').DataTable().draw();
                                                    if(datas == "1"){
-                                                      // swal({type: "success",  title: "Sukses Simpan",   text: "sukses Tersimpan.",   timer: 1000,   showConfirmButton: false });
-                                                       //$('#noticeModal').modal('toggle');
+                                                       swal({type: "success",  title: "Sukses Simpan",   text: "sukses Tersimpan.",   timer: 1000,   showConfirmButton: false });
+                                                       $('#noticeModal').modal('toggle');
                                                    }else{
                                                        swal({type: "warning",  title: "Gagal Simpan",   text: "Gagal Tersimpan.",   timer: 1000,   showConfirmButton: false });
-                                                       //location.reload();
                                                    }
                                                  }
                                                })
