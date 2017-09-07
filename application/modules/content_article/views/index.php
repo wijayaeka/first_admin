@@ -12,27 +12,27 @@ $("#pageload").html(pageload);
     margin: 0% 1%;
 }
 </style>
+
 <div class="content">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-icon" data-background-color="rose">
-                                    <i class="material-icons">chrome reader mode</i>
+                                    <i class="material-icons">description</i>
                                 </div>
 
                                     <h4 class="card-title">Article</h4>
                                     <div class="col-md-12"><?php //echo json_encode($this->session->all_userdata());?>
-                                    <div class="toolbar" >
-                                        <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                    <div class="btn-group" >                                        <!--        Here you can write extra buttons/actions for the toolbar              -->
                                         <button id="buttonAdd" class="btn btn-primary btn-round" >
-                                            <i class="material-icons">add</i> Add New
+                                            <i class="material-icons">add</i><span class="hidden-xs"> Add New </span>
                                         </button>
                                         <button id="buttonEdit" class="btn btn-warning btn-round disabled">
-                                            <i class="material-icons">edit</i> Edit
+                                            <i class="material-icons">edit</i> <span class="hidden-xs">Edit</span>
                                         </button>
                                         <button id="buttonDelete" class="btn btn-danger btn-round disabled">
-                                            <i class="material-icons">delete</i> Delete
+                                            <i class="material-icons">delete</i> <span class="hidden-xs">Delete</span>
                                         </button>
                                     </div>
                                     </div>
@@ -42,11 +42,15 @@ $("#pageload").html(pageload);
                                               <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Date</th>
-                                                    <th>Title</th>
+                                                    <th>Content</th>
                                                     <th>Category</th>
+                                                    <th>Title</th>
+                                                    <th>Date</th>
                                                     <th>Status</th>
                                                     <th>Headline</th>
+                                                    <th>Running News</th>
+                                                    <th>Comment</th>
+                                                    <th>User</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -62,7 +66,7 @@ $("#pageload").html(pageload);
                                         </div>
                                       </div>
                                 </div>
-
+								
                             <!--  end card  -->
                         </div>
 
@@ -72,8 +76,32 @@ $("#pageload").html(pageload);
                 </div>
             </div>
 
+<style>
+.my_class{
+        text-align:center;
+    }
+ .red{
+        text-align:center;
+        font-weight:bold;
+        color:red;
+    }
+  .blue{
+        text-align:center;
+        font-weight:bold;
+        color:blue;
+    }
+.center{
+	text-align:center;
+}
+</style>
 <script type="text/javascript">
-
+	function switch_status(stat){
+		if(stat == "on"){
+			return ' <div class="togglebutton"><label><input type="checkbox"  checked title="On"><span class="toggle"></span></label></div>';
+		}else{
+			return ' <div class="togglebutton"><label><input type="checkbox"  ><span class="toggle"></span></label></div>';
+		}
+	}
     $('#datatables').DataTable({
                 "processing": true,
                  "serverSide": true,
@@ -84,7 +112,37 @@ $("#pageload").html(pageload);
                 "language": {
                     search: "_INPUT_",
                     searchPlaceholder: "Search records",
-                }
+                },
+                 "columnDefs": [
+                 		 {className: "my_class", "targets": [5,6,7] },
+                 		 {className: "red", "targets": [1] },
+                 		 {className: "blue", "targets": [2] },
+                 		 {
+			        		"render": function ( data, type, row ) {
+			                    return switch_status(row[5]);
+			                },
+			                "targets": 5
+			        	},
+                 		{
+			        		"render": function ( data, type, row ) {
+			                    return switch_status(row[6]);
+			                },
+			                "targets": 6
+			        	},
+			        	{
+			        		"render": function ( data, type, row ) {
+			                    return switch_status(row[7]);
+			                },
+			                "targets": 7
+			        	},
+			        	{
+			        		"render": function ( data, type, row ) {
+			                    return switch_status(row[8]);
+			                },
+			                "targets": 8
+			        	}
+			        	
+                 ]
 
              });
     $('.card .material-datatables label').addClass('form-group');

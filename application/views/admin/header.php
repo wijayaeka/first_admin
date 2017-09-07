@@ -29,7 +29,7 @@
         var token_code =  '<?php echo $this->security->get_csrf_hash(); ?>';
         //alert(token)
     </script>
-
+	
 
 </head>
 

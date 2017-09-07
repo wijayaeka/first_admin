@@ -28,8 +28,8 @@
 	      image_holder.empty();
 	      if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg"){
 	        if (typeof(FileReader) != "undefined") {
-	          if (parseInt(size) > 200000) {
-	              swal({  type: "warning",  title: "Oops",   text: "Ukuran File Lebih Dari 200 Kb.",   timer: 1000,   showConfirmButton: false });
+	          if (parseInt(size) > 5000000) {
+	              swal({  type: "warning",  title: "Oops",   text: "Ukuran File Lebih Dari 5000 Kb.",   timer: 1000,   showConfirmButton: false });
                 image_holder_default.show();
 	          }else{
 	              for (var i = 0; i < countFiles; i++)
@@ -76,7 +76,7 @@
 	      }
   }
     $(".close").click(function(){
-     $( "#minimizeSidebar" ).trigger( "click" );
+    // $( "#minimizeSidebar" ).trigger( "click" );
     });
 </script>
 <div class="modal-header">
@@ -96,7 +96,7 @@
                                                           <label class="control-label">Content Category
                                                           </label><br>
                                                           <?php //echo json_encode($list_level);?>
-                                                          <select class="form-control default-select2" name="article_category" id="article_category" style="width:100%;">
+                                                          <select class="form-control default-select2" name="article_category" id="article_category" style="width:100%;" required="true">
                                                             <option selected> Choose Category</option> -->
                                                           <?php
                                                               foreach($list_content_category as $ll){
@@ -105,7 +105,28 @@
                                                               }
                                                           ?>
                                                          </select>
-                                                      <span class="material-input"></span></div>
+                                                      <span class="material-input"></span>
+                                                      </div>
+                                                  </div>
+                                                  <div class="input-group">
+                                                      <span class="input-group-addon">
+                                                          <i class="material-icons">class</i>
+                                                      </span>
+                                                      <div class="form-group is-empty">
+                                                          <label class="control-label">Article Category
+                                                          </label><br>
+                                                          <?php //echo json_encode($list_level);?>
+                                                          <select class="form-control default-select2" name="article_content_category" id="article_content_category" required="true" style="width:70%;">
+                                                            <option selected> Choose Category</option> -->
+                                                          <?php
+                                                              foreach($list_article_category as $ll){
+
+                                                                echo "<option value='".$ll->id_category_article."' >".$ll->article_category_name."</option>";
+                                                              }
+                                                          ?>
+                                                         </select> <p class="btn btn-primary btn-fab btn-fab-mini" id="popup_category_article"><i class="material-icons">launch</i></p>
+                                                      <span class="material-input"></span>
+                                                      </div>
                                                   </div>
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
@@ -127,7 +148,7 @@
                                                             <label class="control-label">Publish Date
                                                                 <small>(required)</small>
                                                             </label>
-                                                              <input type="text" name="publish_date" id="publish_date" class="form-control datepicker col-sm-3" value="<?php echo date("Y-m-d");?>" />
+                                                              <input type="text" name="publish_date" id="publish_date" required="true" class="form-control datepicker col-sm-3" value="<?php echo date("Y-m-d");?>" />
                                                         <span class="material-input"></span></div>
                                                     </div>
                                                   <div class="col-sm-6">
@@ -225,19 +246,28 @@
             <div class="form-group label-floating is-empty">
                 <label class="control-label">Article (Indonesian)
                 </label><br>
-                 <textarea id="isi_article" name="isi_article"></textarea>
+                 <textarea id="isi_article" name="isi_article" required="true"></textarea>
             <span class="material-input"></span></div>
           </div>
           <div class="col-sm-6">
             <div class="form-group label-floating is-empty">
                 <label class="control-label">Article (English)
                 </label><br>
-                <textarea name="article_eng" id="article_eng"  class="form-control"  style="min-height:150px;"></textarea>
+                <textarea name="article_eng" id="article_eng"  class="form-control" required="true"  style="min-height:150px;"></textarea>
             <span class="material-input"></span></div>
           </div>
   </div>
 
-                                            </div></div>
+                                            </div>
+                                             <div class="modal fade " id="smallModal" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog modal-notice">
+                                        <div class="modal-content">
+                                          <div id="return_content2">
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                                            </div>
                                             <div class="col-sm-row">
                                             <div class="modal-footer" style="padding:10px 10px;">
                                                 <button type="submit" class="btn btn-success btn-round"><i class="fa fa-save"></i> &nbsp; Save</button>
@@ -246,6 +276,20 @@
                                               </div>
                                               </form>
                                             <script type="text/javascript">
+                                            
+                                            
+                                             $('#popup_category_article').click( function () {
+											        $('#smallModal').modal({backdrop: 'static',keyboard: false});
+											            $.ajax({
+											      						type:"POST",
+											      						url:"<?php echo base_url()?>content_article/add_new",
+											      						data:token,
+											      						success:function(returns){
+											      							$("#return_content").html(balikan);
+											      						}
+														       })
+											    });
+
                                             $('.datetimepicker').datetimepicker({
             icons: {
                 time: "fa fa-clock-o",

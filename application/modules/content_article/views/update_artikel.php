@@ -76,18 +76,18 @@
 	      }
   }
     $(".close").click(function(){
-     $( "#minimizeSidebar" ).trigger( "click" );
+    // $( "#minimizeSidebar" ).trigger( "click" );
     });
 </script>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
     <h5 class="modal-title" id="myModalLabel">Update Article</h5><hr></hr>
 </div>
-<form class="form-horizontal" id="form_process" method="post" action="<?php echo base_url();?>content_article/update_artikel" enctype="multipart/form-data">
+<form class="form-horizontal" id="for_process" method="post" action="<?php echo base_url();?>content_article/update_artikel" enctype="multipart/form-data">
 <div class="row">
 <div class="modal-body">
   <?php foreach($data_article as $da){?>
-      <input type="text" name="id_article" id="id_article" value="<?php echo $da->id_article;?>" />
+      <input type="hidden" name="id_article" id="id_article" value="<?php echo $da->id_article;?>" />
       <input type="hidden" id="<?php echo $this->security->get_csrf_token_name(); ?>" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                                                 <div class="col-sm-6">
                                                   <div class="input-group">
@@ -108,6 +108,27 @@
                                                           ?>
                                                          </select>
                                                       <span class="material-input"></span></div>
+                                                  </div>
+                                                  <div class="input-group">
+                                                      <span class="input-group-addon">
+                                                          <i class="material-icons">class</i>
+                                                      </span>
+                                                      <div class="form-group is-empty">
+                                                          <label class="control-label">Article Category
+                                                          </label><br>
+                                                          <?php //echo json_encode($list_level);?>
+                                                          <select class="form-control default-select2" name="article_content_category" id="article_content_category" required="true" style="width:70%;">
+                                                            <option selected> Choose Category</option> -->
+                                                          <?php
+                                                          		 echo "<option selected value='".$da->article_category."' >".$da->article_category_name."</option>";
+                                                              foreach($list_article_category as $ll){
+
+                                                                echo "<option value='".$ll->id_category_article."' >".$ll->article_category_name."</option>";
+                                                              }
+                                                          ?>
+                                                         </select> <p class="btn btn-primary btn-fab btn-fab-mini" id="popup_category_article"><i class="material-icons">launch</i></p>
+                                                      <span class="material-input"></span>
+                                                      </div>
                                                   </div>
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
@@ -303,7 +324,6 @@
                 inline: true
             }
          });
-
          $('.datepicker').datetimepicker({
             format: 'YYYY-MM-DD',
             icons: {
@@ -319,7 +339,6 @@
                 inline: true
             }
          });
-
          $('.timepicker').datetimepicker({
 //          format: 'H:mm',    // use this format if you want the 24hours timepicker
             format: 'h:mm A',    //use this format if you want the 12hours timpiecker with AM/PM toggle
@@ -334,17 +353,16 @@
                 clear: 'fa fa-trash',
                 close: 'fa fa-remove',
                 inline: true
-
             }
          });
-                                                $(document).ready(function() {
-                                                     $('.default-select2').select2()
-                                                });
+$(document).ready(function() {
+	$('.default-select2').select2()
+});
 $("#form_process").submit(function(e) {
                                               	e.preventDefault();
                                               	e = e || window.e
                                                 var form = e.target;
-                                               var data = new FormData(form);
+                                                var data = new FormData(form);
                                                $.ajax({
                                                  url: form.action,
                                                  method: form.method,
@@ -365,6 +383,5 @@ $("#form_process").submit(function(e) {
                                                  }
                                                })
                                                return false;
-
 })
                                             </script>

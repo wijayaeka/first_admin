@@ -5,6 +5,8 @@ class Login extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('encryption');
+		 session_start();
+		
 	}
 	public function index(){
 		$this->load->view('login');
@@ -25,11 +27,10 @@ class Login extends CI_Controller {
 						'img'     => $userdata->img,
 					);
 					$this->session->set_userdata($data);
-					//$this->db->close();
-					$_SESSION['KCFINDER']=array();
-				  $_SESSION['KCFINDER']['disabled'] = false;
-				  $_SESSION['KCFINDER']['uploadURL'] = "http://localhost/pht/image_property";
-				  $_SESSION['KCFINDER']['uploadDir'] = "http://localhost/pht/image_property";
+            $_SESSION['ses_kcfinder']['disabled'] = false;
+
+            $_SESSION['ses_kcfinder']['uploadURL'] = base_url()."assets/content_upload";
+				  
 					echo '1';
 			}
 		}else{
