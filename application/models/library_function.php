@@ -12,6 +12,15 @@ class library_function extends CI_Model {
         return $sql_details;
 
     }
+	public function get_check_exist_assign($id_menu,$id_article){
+			$query = $this->db->query("select
+						assisgn_menu_article2.id_menu
+						FROM
+						assisgn_menu_article2
+						where  assisgn_menu_article2.id_menu = '$id_menu'
+						and assisgn_menu_article2.id_article	=	'$id_article' and assisgn_menu_article2.status = 'Y' ");
+       return $query->num_rows();
+	}
 	public function get_check_prev_modul($id_modul, $id_privilege_modul){
 				 $query  = $this->db->query("select * from access_modul where id_modul = '$id_modul' and id_privilege_modul = '$id_privilege_modul' and active = 'Y'  ");
 				 return $query->num_rows();

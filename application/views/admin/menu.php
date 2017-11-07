@@ -114,7 +114,13 @@
                                </div>
            </div>
        </div>
-       <div class="main-panel">
+       <div class="main-panel" style=" 
+	   background-image: url(<?php echo base_url()?>assets/img/login.jpg);
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size:  cover;
+    background-color: #999;">
            <nav class="navbar navbar-transparent navbar-absolute" style="background-color:#fcfcfc;">
                <div class="container-fluid">
                    <div class="navbar-minimize">

@@ -100,7 +100,6 @@
                                                             <option selected> Choose Category</option> -->
                                                           <?php
                                                               foreach($list_content_category as $ll){
-
                                                                 echo "<option value='".$ll->id_category."' >".$ll->category_name."</option>";
                                                               }
                                                           ?>
@@ -120,7 +119,6 @@
                                                             <option selected> Choose Category</option> -->
                                                           <?php
                                                               foreach($list_article_category as $ll){
-
                                                                 echo "<option value='".$ll->id_category_article."' >".$ll->article_category_name."</option>";
                                                               }
                                                           ?>
@@ -289,7 +287,6 @@
 											      						}
 														       })
 											    });
-
                                             $('.datetimepicker').datetimepicker({
             icons: {
                 time: "fa fa-clock-o",
@@ -304,7 +301,6 @@
                 inline: true
             }
          });
-
          $('.datepicker').datetimepicker({
             format: 'YYYY-MM-DD',
             icons: {
@@ -320,7 +316,6 @@
                 inline: true
             }
          });
-
          $('.timepicker').datetimepicker({
 //          format: 'H:mm',    // use this format if you want the 24hours timepicker
             format: 'h:mm A',    //use this format if you want the 12hours timpiecker with AM/PM toggle
@@ -335,7 +330,6 @@
                 clear: 'fa fa-trash',
                 close: 'fa fa-remove',
                 inline: true
-
             }
          });
                                                 $(document).ready(function() {
@@ -364,6 +358,5 @@
                                                  }
                                                })
                                                return false;
-
 })
                                             </script>

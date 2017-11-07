@@ -95,13 +95,24 @@ $("#pageload").html(pageload);
 }
 </style>
 <script type="text/javascript">
-	function switch_status(stat){
+	function switch_status(stat,id){
 		if(stat == "on"){
-			return ' <div class="togglebutton"><label><input type="checkbox"  checked title="On"><span class="toggle"></span></label></div>';
+			return ' <div class="togglebutton"  disabled="true"><label><input disabled="true" type="checkbox" onclick="exec_switch('+id+',\'content_article\','+stat+',\'datatables\')"  checked title="On"><span class="toggle"></span></label></div>';
 		}else{
-			return ' <div class="togglebutton"><label><input type="checkbox"  ><span class="toggle"></span></label></div>';
+			return ' <div class="togglebutton"  disabled="true"><label><input disabled="true" type="checkbox" onclick="exec_switch('+id+',\'content_article\','+stat+',\'datatables\')"  ><span class="toggle"></span></label></div>';
 		}
 	}
+	/*function exec_switch(id,link,act,table){
+		  $.ajax({
+      						type:"POST",
+      						url:"<?php echo base_url()?>"+link+"/"+act,
+      						data:id,
+      						success:function(returns){
+								$('#'+table+'').DataTable().draw();
+      						}
+			}); 
+				   
+	}*/
     $('#datatables').DataTable({
                 "processing": true,
                  "serverSide": true,
@@ -119,25 +130,25 @@ $("#pageload").html(pageload);
                  		 {className: "blue", "targets": [2] },
                  		 {
 			        		"render": function ( data, type, row ) {
-			                    return switch_status(row[5]);
+			                    return switch_status(row[5],row[0]);
 			                },
 			                "targets": 5
 			        	},
                  		{
 			        		"render": function ( data, type, row ) {
-			                    return switch_status(row[6]);
+			                    return switch_status(row[6],row[0]);
 			                },
 			                "targets": 6
 			        	},
 			        	{
 			        		"render": function ( data, type, row ) {
-			                    return switch_status(row[7]);
+			                    return switch_status(row[7],row[0]);
 			                },
 			                "targets": 7
 			        	},
 			        	{
 			        		"render": function ( data, type, row ) {
-			                    return switch_status(row[8]);
+			                    return switch_status(row[8],row[0]);
 			                },
 			                "targets": 8
 			        	}

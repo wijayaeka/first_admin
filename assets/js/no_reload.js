@@ -17,8 +17,6 @@ $(function(){
 						dataType: "html",
 						data: token,
 						success: function(msg){
-								//setCookie('pageload', url.toUpperCase(), 100);
-								//$( "#minimizeSidebar" ).trigger( "click" );
 								if ( $("#body").hasClass('sidebar-mini') ) {
 				            $( "#minimizeSidebar" ).trigger( "click" );
 				        }

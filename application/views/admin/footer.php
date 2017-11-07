@@ -1,4 +1,4 @@
-<footer class="footer">
+<!--<footer class="footer">
                 <div class="container-fluid">
                     <nav class="pull-left">
                         <ul>
@@ -32,7 +32,7 @@
                         <a href="<?php echo base_url();?><?php echo base_url();?><?php echo base_url();?>www.creative-tim.com/index.html">Creative Tim</a>, made with love for a better web
                     </p>
                 </div>
-            </footer>
+            </footer> -->
         </div>
     </div>
     <div class="fixed-plugin">

@@ -55,8 +55,7 @@ th.dt-red, td.dt-red { text-align: center; font-weight:bold; color:#F44336;  }
                                             </tbody>
                                         </table>
                                     </div>
-                                    </div>
-
+                                    
                                 <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                       <div class="modal-dialog modal-notice">
                                         <div class="modal-content">
@@ -65,6 +64,9 @@ th.dt-red, td.dt-red { text-align: center; font-weight:bold; color:#F44336;  }
                                         </div>
                                       </div>
                                 </div>
+                                
+                                    </div>
+
                             <!--  end card  -->
                         </div>
 

@@ -83,7 +83,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
     <h5 class="modal-title" id="myModalLabel">Update Article</h5><hr></hr>
 </div>
-<form class="form-horizontal" id="for_process" method="post" action="<?php echo base_url();?>content_article/update_artikel" enctype="multipart/form-data">
+<form class="form-horizontal" id="form_process" method="post" action="<?php echo base_url();?>content_article/update_artikel" enctype="multipart/form-data">
 <div class="row">
 <div class="modal-body">
   <?php foreach($data_article as $da){?>
@@ -122,7 +122,6 @@
                                                           <?php
                                                           		 echo "<option selected value='".$da->article_category."' >".$da->article_category_name."</option>";
                                                               foreach($list_article_category as $ll){
-
                                                                 echo "<option value='".$ll->id_category_article."' >".$ll->article_category_name."</option>";
                                                               }
                                                           ?>
@@ -359,9 +358,13 @@ $(document).ready(function() {
 	$('.default-select2').select2()
 });
 $("#form_process").submit(function(e) {
+	    CKEDITOR.instances['isi_article'].updateElement();
+		CKEDITOR.instances['article_eng'].updateElement();
                                               	e.preventDefault();
                                               	e = e || window.e
+												
                                                 var form = e.target;
+												
                                                 var data = new FormData(form);
                                                $.ajax({
                                                  url: form.action,

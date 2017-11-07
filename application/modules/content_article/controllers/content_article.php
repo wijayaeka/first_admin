@@ -70,8 +70,8 @@ class Content_article extends CI_Controller {
 			 $running_news = $this->security->sanitize_filename($this->input->post('running_news'), TRUE);
 			 $headline = $this->security->sanitize_filename($this->input->post('headline'), TRUE);
 			 $komentar_status = $this->security->sanitize_filename($this->input->post('open_comment'), TRUE);
-			 $isi_article = $this->editorfix($this->input->post('isi_article'));
-			 $isi_article_eng = $this->editorfix($this->input->post('article_eng'));
+			 $isi_article = addslashes($this->input->post('isi_article'));
+			 $isi_article_eng = addslashes($this->input->post('article_eng'));
 			 $url_article1 = strtolower($this->input->post('title'));
 			 $url_article2 = str_replace(' ','-',$url_article1);
 			 $url_article3 = str_replace('/','atau',$url_article2);
@@ -103,14 +103,53 @@ class Content_article extends CI_Controller {
 				);
 				 $ext = $this->library_function->getExtension($_FILES['foto']['name']);
 				if($this->library_function->getExtension($_FILES['foto']['name']) != ''){
-		 				$ext = array("gambar" => "$foto.$ext");
-		 				$data = array_merge($data,$ext);
-		 				$this->upload_gambar('foto',$foto,'assets/article_content');
- 				}
-				echo $this->db->insert('article',$data);
-				//echo json_encode($data);
+		 				//$ext = array("gambar" => "$foto.$ext");
+				 				//$data = array_merge($data,$ext);
+				 				$this->upload_gambar('foto',$foto.".".$ext,'assets/article_content');
+								$foto = $foto.".".$ext;
+								$image_clause = "gambar	,";
+								$image_value = "'$foto',";
+ 				}else{
+								$image_clause = "";
+								$image_value = "";
+				}
 				//echo $this->db->insert('article',$data);
-
+				//echo json_encode($data);
+				echo  $this->db->query("insert into article (
+											title ,
+											username ,
+											kategori	,
+											article_category ,
+											url_article	,
+											headline,
+											running_news	,
+											isi_article	,
+											isi_article_eng	,
+											hari	,
+											tanggal	,
+											jam	 ,
+											$image_clause
+											status	,
+											dibaca,	
+											komentar_status )values(
+												 '$title',
+												 '$username',
+												 '$article_category',
+												 '$article_content_category',
+												 '$url_article',
+												 '$headline',
+												 '$running_news',
+												 '$isi_article',
+												 '$isi_article_eng',
+												 '$hari',
+												 '$tanggal',
+												 '$jam',
+												 $image_value
+												 '$active_status',
+												 'N',
+												 '$komentar_status'
+											)"
+						);
 		 }
 		 public  function upload_gambar($img,$new_name,$url){
 	 		$this->load->helper(array('form', 'url'));
@@ -180,8 +219,8 @@ class Content_article extends CI_Controller {
 					 $running_news = $this->security->sanitize_filename($this->input->post('running_news'), TRUE);
 					 $headline = $this->security->sanitize_filename($this->input->post('headline'), TRUE);
 					 $komentar_status = $this->security->sanitize_filename($this->input->post('open_comment'), TRUE);
-					 $isi_article = $this->editorfix($this->input->post('isi_article'));
-					 $isi_article_eng = $this->editorfix($this->input->post('article_eng'));
+					 $isi_article = addslashes($this->input->post('isi_article'));
+					 $isi_article_eng = addslashes($this->input->post('article_eng'));
 					 $url_article1 = strtolower($this->input->post('title'));
 					 $url_article2 = str_replace(' ','-',$url_article1);
 					 $url_article3 = str_replace('/','atau',$url_article2);
@@ -212,12 +251,34 @@ class Content_article extends CI_Controller {
 						);
 						$ext = $this->library_function->getExtension($_FILES['foto']['name']);
 						if($this->library_function->getExtension($_FILES['foto']['name']) != ''){
-				 				$ext = array("gambar" => "$foto.$ext");
-				 				$data = array_merge($data,$ext);
-				 				$this->upload_gambar('foto',$foto,'assets/article_content');
-		 				}
-						$this->db->where('id_article',$id_article);
-						echo $this->db->update('article',$data);
+				 				//$ext = array("gambar" => "$foto.$ext");
+				 				//$data = array_merge($data,$ext);
+				 				$this->upload_gambar('foto',$foto.".".$ext,'assets/article_content');
+								$foto = $foto.".".$ext;
+								$image_clause = "gambar	= '$foto',";
+		 				}else{
+								$image_clause = "";
+						}
+						//$this->db->where('id_article',$id_article);
+						//echo $this->db->update('article',$data);
+						echo $this->db->query("update article set
+											title = '$title',
+											username =  '$username',
+											kategori	= '$article_category',
+											article_category = '$article_content_category',
+											url_article	= '$url_article',
+											headline	= '$headline',
+											running_news	= '$running_news',
+											isi_article	= '$isi_article',
+											isi_article_eng	= '$isi_article_eng',
+											hari	= '$hari',
+											tanggal	= '$tanggal',
+											jam	= '$jam',
+											$image_clause
+											status	= '$active_status',
+											dibaca	= 'N',
+											komentar_status	= '$komentar_status' where id_article  = '$id_article'
+										");
 						//echo "update article set isi_article = '$isi_article' where id_article  = '$id_article'";
 						
 				 }

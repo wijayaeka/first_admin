@@ -24,7 +24,7 @@ th.dt-red, td.dt-red { text-align: center; font-weight:bold; color:#F44336;  }
                                     <i class="material-icons">list</i>
                                 </div>
                                 <div class="card-content">
-                                    <h4 class="card-title">Module</h4>
+                                    <h4 class="card-title">Article Category</h4>
                                     <div class="col-md-12">
                                     <div class="toolbar" >
                                         <!--        Here you can write extra buttons/actions for the toolbar              -->
