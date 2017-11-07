@@ -80,11 +80,11 @@ th.dt-red, td.dt-red { text-align: center; font-weight:bold; color 	:#F44336;  }
                 </div>
             </div>
 
-<script type="text/javascript">
+<script type="text/javascript"> 
 
     $('#datatables').DataTable({
                 "processing": true,
-                 "serverSide": true,
+                 "serverSide": true, 
                  "scrollX": true,
                  "displayLength": 5,
                  "pagingType": "full_numbers",
